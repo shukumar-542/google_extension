@@ -75,16 +75,22 @@ const saveBtn =  document.getElementById('save-data');
 const getData = document.getElementById('get-save-data');
 
 
+let posts = []
 document.getElementById('save-data').addEventListener('click', function(){
     const title = document.getElementById('title').value;
-
-    chrome.storage.sync.set({'title' : title}, function(){
+    const description = document.getElementById('des').value;
+    const allValue = {'title' : title, 'desc' : description}
+    posts.push(allValue)
+    chrome.storage.sync.set({'allValue' : posts}, function(){
         alert('success')
     })
 })
 
 document.getElementById('get-save-data').addEventListener('click', function(){
-    chrome.storage.sync.get('title', function (data){
-        alert(data.title)
+    chrome.storage.sync.get('allValue', function (data){
+        // alert(data)
+        // data.allValue.map((item)=> console.log(item))
+        // posts.push(data.allValue)
+        // console.log(posts);
     })
 })
